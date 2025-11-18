@@ -8,7 +8,7 @@ const API = axios.create({
 // Job API calls
 export const jobAPI = {
   getAll: (sortBy) => API.get(`/api/jobs${sortBy ? `?sort=${sortBy}` : ""}`),
-  getLatest: () => API.get("/api/jobs/latest"),
+  getLatest: () => API.get(`/api/jobs/latest`),
   getById: (id) => API.get(`/api/jobs/${id}`),
   getByUserEmail: (email) => API.get(`/api/jobs/user/${email}`),
   create: (jobData) => API.post("/api/jobs", jobData),
@@ -19,7 +19,7 @@ export const jobAPI = {
 // Accepted Task API calls
 export const acceptedTaskAPI = {
   getByEmail: (email) => API.get(`/api/accepted-tasks/${email}`),
-  accept: (taskData) => API.post("/api/accepted-tasks", taskData),
+  accept: (taskData) => API.post(`/api/accepted-tasks`, taskData),
   delete: (id) => API.delete(`/api/accepted-tasks/${id}`),
 };
 
