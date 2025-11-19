@@ -1,16 +1,28 @@
-# React + Vite
+Live Demo
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Live URL: https://freelance-obyda.netlify.app/
 
-Currently, two official plugins are available:
+Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+React, Vite, Tailwind CSS, React Router, Firebase Auth, TanStack Query, Axios, Framer Motion, Sonner/Toast
 
-## React Compiler
+Key Features
+1. Authentication With Firebase (Login, Register, Google Sign In)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+The app provides a complete authentication flow using Firebase, offering login, registration, and Google OAuth. Protected routes prevent unauthorized access and ensure only logged-in users can add, update, or accept tasks.
 
-## Expanding the ESLint configuration
+2. Full Job Management Interface (Add, Update, Delete, My Jobs)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Users can post new jobs, update their previously posted tasks, and delete them instantly from the UI and database. Forms come pre-filled during updates, and all operations are powered by optimized React Query mutations.
+
+3. Accept Task System with Interactive UI
+
+Users can view job details and accept tasks posted by others. Accepted tasks appear in a personalized dashboard where they can mark tasks as Done or Cancel, with real-time state updates for a smooth experience.
+
+4. Fully Responsive & Modern UI
+
+The interface is fully mobile-friendly with a clean, modern layout using Tailwind CSS and Framer Motion animations. Cards, grids, forms, and navigation automatically adapt to all device sizes for maximum accessibility.
+
+5. Enhanced UX With Theming, Toasts & Loading States
+
+Includes light/dark mode toggle, animated loading spinners, and toast messages for success/error notifications. Users receive instant visual feedback for every action, improving usability and overall user satisfaction.
