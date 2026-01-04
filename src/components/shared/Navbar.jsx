@@ -18,17 +18,24 @@ const Navbar = () => {
     }
   };
 
-  const navLinks = [
+  // 🌐 Public pages
+  const publicLinks = [
     { path: "/", label: "Home" },
     { path: "/all-jobs", label: "All Jobs" },
-    ...(user
-      ? [
-          { path: "/add-job", label: "Add a Job" },
-          { path: "/my-added-jobs", label: "My Added Jobs" },
-          { path: "/my-accepted-tasks", label: "My Accepted Tasks" },
-        ]
-      : []),
+    { path: "/about", label: "About" },
+    { path: "/contact", label: "Contact" },
   ];
+
+  // 🔒 Private pages
+  const privateLinks = user
+    ? [
+        { path: "/add-job", label: "Add a Job" },
+        { path: "/my-added-jobs", label: "My Added Jobs" },
+        { path: "/my-accepted-tasks", label: "My Accepted Tasks" },
+      ]
+    : [];
+
+  const navLinks = [...publicLinks, ...privateLinks];
 
   return (
     <nav className="bg-white dark:bg-gray-900 shadow-md sticky top-0 z-50">
@@ -62,11 +69,12 @@ const Navbar = () => {
             ))}
           </div>
 
-         
+          {/* Desktop Auth Section */}
           <div className="hidden md:flex items-center space-x-4">
             {user ? (
               <div className="flex items-center space-x-3">
-                <div className="relative group">
+                {/* Profile Avatar → My Profile Route */}
+                <Link to="/my-profile" className="relative group">
                   <img
                     src={user.photoURL || "https://via.placeholder.com/40"}
                     alt={user.displayName}
@@ -74,10 +82,11 @@ const Navbar = () => {
                   />
                   <div className="absolute right-0 top-12 bg-white dark:bg-gray-800 shadow-lg rounded-lg p-3 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
                     <p className="text-sm font-semibold text-gray-800 dark:text-white">
-                      {user.displayName}
+                      My Profile
                     </p>
                   </div>
-                </div>
+                </Link>
+
                 <button onClick={handleLogout} className="btn-primary">
                   Logout
                 </button>
@@ -130,18 +139,16 @@ const Navbar = () => {
                   </NavLink>
                 ))}
 
-                {user ? (
-                  <div className="border-t border-gray-200 dark:border-gray-700 pt-3 mt-3">
-                    <div className="flex items-center space-x-3 px-4 py-2">
-                      <img
-                        src={user.photoURL || "https://via.placeholder.com/40"}
-                        alt={user.displayName}
-                        className="w-10 h-10 rounded-full ring-2 ring-primary-500"
-                      />
-                      <span className="font-semibold text-gray-800 dark:text-white">
-                        {user.displayName}
-                      </span>
-                    </div>
+                {user && (
+                  <>
+                    <NavLink
+                      to="/my-profile"
+                      onClick={() => setIsMenuOpen(false)}
+                      className="px-4 py-2 rounded-lg font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+                    >
+                      My Profile
+                    </NavLink>
+
                     <button
                       onClick={() => {
                         handleLogout();
@@ -151,8 +158,10 @@ const Navbar = () => {
                     >
                       Logout
                     </button>
-                  </div>
-                ) : (
+                  </>
+                )}
+
+                {!user && (
                   <div className="flex flex-col space-y-2 border-t border-gray-200 dark:border-gray-700 pt-3 mt-3">
                     <Link
                       to="/login"

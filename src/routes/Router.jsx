@@ -12,7 +12,11 @@ import UpdateJob from "../pages/UpdateJob";
 import MyAcceptedTasks from "../pages/MyAcceptedTasks";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
+import About from "../pages/About";
+import Contact from "../pages/Contact";
 import ErrorPage from "../components/shared/ErrorPage";
+import NotFound from "../pages/NotFound";
+import MyProfile from "../pages/MyProfile";
 
 const router = createBrowserRouter([
   {
@@ -36,6 +40,8 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+
+      // 🔒 Private Routes
       {
         path: "add-job",
         element: (
@@ -68,6 +74,25 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+
+      {
+        path: "my-profile",
+        element: (
+          <PrivateRoute>
+            <MyProfile />
+          </PrivateRoute>
+        ),
+      },
+
+      // 🌐 Public Routes
+      {
+        path: "about",
+        element: <About />,
+      },
+      {
+        path: "contact",
+        element: <Contact />,
+      },
       {
         path: "login",
         element: <Login />,
@@ -75,6 +100,12 @@ const router = createBrowserRouter([
       {
         path: "register",
         element: <Register />,
+      },
+
+      // 🚫 404 Not Found Route
+      {
+        path: "*",
+        element: <NotFound />,
       },
     ],
   },
