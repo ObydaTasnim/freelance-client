@@ -21,7 +21,7 @@ API.interceptors.request.use(
   (error) => {
     console.error("❌ Request Error:", error);
     return Promise.reject(error);
-  }
+  },
 );
 
 // Response interceptor for debugging
@@ -38,12 +38,29 @@ API.interceptors.response.use(
     }
     console.error("❌ API Error:", error.message);
     return Promise.reject(error);
-  }
+  },
 );
 
 // Job API calls
 export const jobAPI = {
-  getAll: (sortBy) => API.get(`/api/jobs${sortBy ? `?sort=${sortBy}` : ""}`),
+  getAll: (params = {}) => {
+    // Build query parameters
+    const queryParams = new URLSearchParams();
+
+    // Add all parameters to query string
+    Object.keys(params).forEach((key) => {
+      if (params[key]) {
+        queryParams.append(key, params[key]);
+      }
+    });
+
+    // Convert to query string
+    const queryString = queryParams.toString();
+
+    // Make the API call
+    return API.get(`/api/jobs${queryString ? `?${queryString}` : ""}`);
+  },
+
   getLatest: () => API.get("/api/jobs/latest"),
   getById: (id) => API.get(`/api/jobs/${id}`),
   getByUserEmail: (email) => API.get(`/api/jobs/user/${email}`),
